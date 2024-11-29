@@ -7,6 +7,21 @@ RUN apt-get update && apt-get install -y git
 # Installer Cython (nécessaire pour pycocotools)
 RUN pip install cython
 
+# Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    python3-distutils \
+    gcc \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installer pip, setuptools et wheel les plus récents
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
+
+
 # Installer numpy explicitement avant les autres dépendances
 RUN pip install numpy==1.24.3
 # Définir le répertoire de travail
