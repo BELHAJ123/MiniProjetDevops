@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y git
 
 # Installer Cython (nécessaire pour pycocotools)
 RUN pip install cython
-
+# Mettre à jour pip et setuptools
+RUN pip install --upgrade pip setuptools wheel
 # Installer les dépendances système nécessaires
 RUN apt-get update && apt-get install -y \
     build-essential \
